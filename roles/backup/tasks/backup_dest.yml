@@ -5,7 +5,7 @@
   shell:
     cmd: >-
       /bin/bash -lc 'echo "$(which rsnapshot)"'
-  register: rsnapshot_bin_path
+  register: rsnapshot_bin_path_installed
 
 - name: Install rsnapshot (APT)
   become: yes
@@ -14,7 +14,7 @@
       - rsnapshot
       - rsync
     state: present
-  when: ansible_os_family == "Debian" and rsnapshot_bin_path.stdout|length < 2 
+  when: ansible_os_family == "Debian" and rsnapshot_bin_path_installed.stdout|length < 2 
 
 - name: Install rsnapshot (YUM)
   become: yes
@@ -23,7 +23,7 @@
       - rsnapshot
       - rsync
     state: present
-  when: ansible_os_family == "RedHat" and rsnapshot_bin_path.stdout|length < 2 
+  when: ansible_os_family == "RedHat" and rsnapshot_bin_path_installed.stdout|length < 2 
 
 - name: "Get path rsnapshot bin (for use)"
   shell:
