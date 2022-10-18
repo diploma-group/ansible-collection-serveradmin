@@ -3,6 +3,14 @@
 # http://www.mad-hacking.net/documentation/linux/reliability/backup/using-rsnapshot-remote.xml
 # http://troy.jdmz.net/rsync/#validate-rsync
 
+# 2022-10-18 LL rsnapshot is missing in epel for rhel 9
+# This allow manual installation
+- name: "Get path rsnapshot bin (Installed?)"
+  shell:
+    cmd: >-
+      /bin/bash -lc 'echo "$(which rsnapshot)"'
+  register: rsnapshot_bin_path_installed
+
 - name: Install rsnapshot (APT)
   become: yes
   apt:
@@ -10,7 +18,7 @@
       - rsnapshot
       - rsync
     state: present
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == "Debian" and rsnapshot_bin_path_installed.stdout|length < 2 
 
 - name: Install rsnapshot (YUM)
   become: yes
@@ -19,7 +27,13 @@
       - rsnapshot
       - rsync
     state: present
-  when: ansible_os_family == "RedHat"
+  when: ansible_os_family == "RedHat" and rsnapshot_bin_path_installed.stdout|length < 2 
+
+- name: "Get path rsnapshot bin (for use)"
+  shell:
+    cmd: >-
+      /bin/bash -lc 'echo "$(which rsnapshot)"'
+  register: rsnapshot_bin_path
 
 - name: Create group for backup user
   become: yes
