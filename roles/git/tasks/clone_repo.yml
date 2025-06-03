@@ -56,8 +56,11 @@
   shell: >-
     sed -e "s/ssh-rsa \S* \?//" {{ user_home.stdout }}/.ssh/{{ repo.unique_deploy_key }}.pub 2>/dev/null
     || echo "Deploykey for {{ clone_repo.user }}@{{ inventory_hostname }} $(date +"%Y-%m-%d")"
-  args:
-    warn: false # Ansible is warning for using sed
+  # 2025-06-03 LH
+  # msg: "Unsupported parameters for (ansible.legacy.command) module: warn. Supported parameters include: _raw_params, _uses_shell, argv, chdir, creates, executable, removes, stdin, stdin_add_newline, strip_empty_ends."
+  # Remove warn-parameter!
+  #args:
+  #  warn: false # Ansible is warning for using sed
   register: deploy_key_comment
   failed_when: false
   when: repo.use_unique_deploy_key
