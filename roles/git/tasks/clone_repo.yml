@@ -67,6 +67,8 @@
 - debug:
     var: deploy_key_comment
   when: repo.use_unique_deploy_key
+  tags:
+    - always
 
 - name: "Create deploy-key for repo for current user"
   become: yes
