@@ -98,7 +98,7 @@ Serveradmin require currently AlmaLinux 9.6 (And isn't maintained to support old
 
 Search for `AlmaLinux OS 9 (x86_64)` from `AlmaLinux OS Foundation`.
 
-Don't foreget to setup auto-recover [Amazon docs: UsingAlarmActions](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UsingAlarmActions.html)
+Don't forget to setup auto-recover [Amazon docs: UsingAlarmActions](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UsingAlarmActions.html)
 
 ### As local virtual server
 
@@ -245,7 +245,7 @@ If you connect with Putty, this isn't possible. After you're connected, you can 
 `ssh -L <ip-address-of-local-network-interface>:3307:/var/lib/mysql/mysql.sock localhost`
 
 Instead of `<ip-address-of-local-network-interface>`, `*` can be used, but be sure to not expose it to internet.
-This method is also possible to use on your local devmode-server, to connect to externel servers with unix-socket-only databases. Then replace `localhost` with server name.
+This method is also possible to use on your local devmode-server, to connect to external servers with unix-socket-only databases. Then replace `localhost` with server name.
 
 ## License
 
