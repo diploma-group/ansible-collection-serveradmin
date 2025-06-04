@@ -62,9 +62,9 @@ Notice: **Never** use _Bridged Adapter_ with Serveradmin in _devmode_. This will
 
 First create a network in VirtualBox to be used with the `Host-only Adapter`. `Tools` -> `Network` -> `Create`. It will be named **`vboxnet0`** (Linux) or **`VirtualBox Host-Only Ethernet Adapter`** (Windows). Typically it will be a `192.168.56.1/24` network. Enable `DHCP Server`. (This is **not** the same as `Preferences` -> `Network` -> `NAT Networks`, which are called `NatNetwork`)
 
-To use __devmode__ with Shared Folders, download **`VirtualBox Guest Additions disc`** for your current version of VirtualBox, and mount when asked for in point 6 under Bootstrap server. For Linux VM-hosts this exists as a seprate package to install with your packagemanager.
+To use __devmode__ with Shared Folders, download **`VirtualBox Guest Additions disc`** for your current version of VirtualBox, and mount when asked for in point 6 under Bootstrap server. For Linux VM-hosts this exists as a separate package to install with your packagemanager.
 
-Create a new VM. (`Machine` -> `Create`). Make sure to make the maximum capacity of the disc big enough. It is growing dynamicly, so it will not will fill up your harddrive until you filled it.
+Create a new VM. (`Machine` -> `Create`). Make sure to make the maximum capacity of the disc big enough. It is growing dynamically, so it will not will fill up your harddrive until you filled it.
 
 Before running the VM, go into settings:
 
@@ -92,7 +92,7 @@ To escape your trapped mouse-pointer in VirtualBox use **Right Ctrl**.
 
 ### AlmaLinux
 
-Serveradmin require currently AlmaLinux 9.0 (And isn't maintained to support older versions)
+Serveradmin require currently AlmaLinux 9.6 (And isn't maintained to support older versions)
 
 ### On AWS
 
@@ -180,7 +180,7 @@ Use `ssh -A <ip address>` or Putty. Activate agent forwarding.
 
 Run: `<prefix>_ansible_vboxsf`
 
-Find VBoxGuestAdditions_7.1.8.iso here: https://download.virtualbox.org/virtualbox/7.1.8/
+Find VBoxGuestAdditions_7.1.10.iso here: https://download.virtualbox.org/virtualbox/7.1.10/
 
 #### 7. Run: Any datamigration, if your applications is dependent on it.
 
