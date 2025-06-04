@@ -135,7 +135,9 @@ Leave default and confirm with `Done`.
 
 #### 7. Begin installation
 
-Set Root Password and user if wanted. (The user will be set up by `<prefix>_ansible_serveradmin`, so not needed.)
+Set Root Password and allow root PermitRootLogin only if it is a local dev-server.
+
+Add yourself as user and should be administrator.
 
 Wait until completed. Remove AlmaLinux installation disk and reboot.
 
@@ -143,23 +145,13 @@ Wait until completed. Remove AlmaLinux installation disk and reboot.
 
 Run `nmcli`.
 
-Run: `nmcli connection modify <connection-name> autoconnect yes` for every disconnected connection.
-
-This will set `ONBOOT=yes` for the connection in `/etc/sysconfig/network-scripts/ifcfg-<connection-name>`. 
-
-This seems only to be a problem with older CentOS which failed to activate all network interfaces/connections for interfaces.
-You can see this specific settings by: `nmcli --fields name,autoconnect connection show` 
-
-Run: `nmcli` again to make sure everything looks ok, and find your new ip-address.
-
-(`ip addr` is an alternative to find your ip-address.)
+Make sure both network-interfaces are up, and look for your ip-address. (Probably 192.168.56.???)
 
 Log out from the server in the console window. You can even restart the virtual machine with Headless start, meaning you have no visual window for the running machine.
 
 #### 9. You can from now on SSH to the machine from your host OS
 
-However `PermitRootLogin` has to be changed to `yes` in `/etc/ssh/sshd_config`.
-Use `ssh root@<ip address>` or Putty. This mean that copy paste, scroll back, and window resize will work.
+Use `ssh youruser@<ip address>` or Putty. This mean that copy paste, scroll back, and window resize will work.
 
 #### 10. Continue with `Bootstrap a server`
 
@@ -167,7 +159,7 @@ Use `ssh root@<ip address>` or Putty. This mean that copy paste, scroll back, an
 
 When asked for `### Serveradmin-repository on Github ###` you need to give details for the configuration repo.
 
-#### 1. Log in as root or a any sudo-user
+#### 1. Log in as your user
 
 #### 2. Run:
 ```
@@ -175,7 +167,7 @@ curl https://raw.githubusercontent.com/tvartom/ansible-collection-serveradmin/ma
 sudo bash bootstrap.sh
 ```
 
-#### 3. Reboot, log in again. (With root if no sudo-user for serveradmin is created yet)
+#### 3. Reboot, log in again. (With your user)
 
 #### 4. Run: `<prefix>_ansible_serveradmin` to set up all main components of the server
 
@@ -187,6 +179,8 @@ Use `ssh -A <ip address>` or Putty. Activate agent forwarding.
 #### 6. Only for devmode with VirtualBox Shared folders
 
 Run: `<prefix>_ansible_vboxsf`
+
+Find VBoxGuestAdditions_7.1.8.iso here: https://download.virtualbox.org/virtualbox/7.1.8/
 
 #### 7. Run: Any datamigration, if your applications is dependent on it.
 
