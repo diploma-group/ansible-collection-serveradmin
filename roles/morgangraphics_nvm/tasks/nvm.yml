@@ -110,8 +110,8 @@
       var: temp_install_nvm_cmd
   - name: Install NVM
     shell: "{{ temp_install_nvm_cmd }}"
-    args:
-      warn: false
+    #args:
+    #  warn: false
     register: nvm_result
     changed_when: "'already installed' not in nvm_result.stdout"
     failed_when:

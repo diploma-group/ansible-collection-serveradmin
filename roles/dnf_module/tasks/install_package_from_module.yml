@@ -18,7 +18,7 @@
   shell:
     cmd: >-
       dnf module list --enabled {{ dnf.module_name }} | grep "^{{ dnf.module_name }}"
-    warn: false # Ansible is warning for using dnf
+    #warn: false # Ansible is warning for using dnf
   register: module_list_enabled
   changed_when: dnf.module_spec|string  not in module_list_enabled.stdout
   failed_when: module_list_enabled.rc > 0 and 'No matching Modules to list' not in module_list_enabled.stderr
@@ -38,7 +38,7 @@
   become: yes
   shell:
     cmd: "dnf module reset -y {{ dnf.module_name }}"
-    warn: false # Ansible is warning for using dnf
+    #warn: false # Ansible is warning for using dnf
   when: dnf.module_spec|string not in module_list_enabled.stdout
   tags:
     - always
@@ -47,7 +47,7 @@
   become: yes
   shell:
     cmd: "dnf module enable -y {{ dnf.module_name }}:{{ dnf.module_spec }}"
-    warn: false # Ansible is warning for using dnf
+    #warn: false # Ansible is warning for using dnf
   when: dnf.module_spec|string not in module_list_enabled.stdout
   tags:
     - always

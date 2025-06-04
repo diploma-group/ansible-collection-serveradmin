@@ -5,7 +5,7 @@
     curl -s https://api.github.com/repos/sass/dart-sass/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")'
   args:
     # Warning om att inte shell ska användas för curl:
-    warn: false
+    #warn: false
   register: sass_latest_version_output
   changed_when: false
 
